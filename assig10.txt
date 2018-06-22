@@ -1,0 +1,39 @@
+QUES: Dynamic Array Data Structure
+ANS
+
+package ad1;
+
+import java.lang.reflect.Field;
+import java.util.*;
+
+
+class DynamicArray
+{
+   ArrayList arrayList ;
+   int size;
+   public DynamicArray (int size) throws Exception
+   {
+      this.size=size;
+       arrayList= new ArrayList(4);
+        System.out.println(getCapacity(arrayList));
+       arrayList.add(1);
+       arrayList.ensureCapacity(size*2);
+       System.out.println(getCapacity(arrayList));
+       
+   }
+static int getCapacity(ArrayList a1) throws Exception
+{
+    Field field = ArrayList.class.getDeclaredField("elementData");
+    field.setAccessible(true);
+    int capacity =((Object[])field.get(a1)).length;
+    return capacity;
+}
+}
+class DriverClass
+{
+    public static void main(String[] args) throws Exception 
+    {
+        DynamicArray obj=new DynamicArray(4);
+        
+    }
+}
